@@ -5,11 +5,14 @@ import { useI18n } from "./i18n";
 import DefaultPage from "keycloakify/login/DefaultPage";
 import Template from "keycloakify/login/Template";
 import "./index.css";
+
 const UserProfileFormFields = lazy(
     () => import("keycloakify/login/UserProfileFormFields")
 );
 
-import Login from "./pages/Login";
+const Login = lazy(() => import("./pages/Login"));
+const Register = lazy(() => import("./pages/Register"));
+const LoginResetPassword = lazy(() => import("./pages/LoginResetPassword"));
 
 const doMakeUserConfirmPassword = true;
 
@@ -19,17 +22,45 @@ export default function KcPage(props: { kcContext: KcContext }) {
     const { i18n } = useI18n({ kcContext });
 
     return (
-        <Suspense>
+        <Suspense fallback={<div>Cargando...</div>}>
             {(() => {
                 switch (kcContext.pageId) {
                     case "login.ftl":
                         return (
                             <Login
-                                kcContext={kcContext}
-                                i18n={i18n}
-                                classes={classes}
-                                Template={Template}
-                                doUseDefaultCss={false}
+                                {...{
+                                    kcContext,
+                                    i18n,
+                                    classes,
+                                    Template,
+                                    doUseDefaultCss: false
+                                }}
+                            />
+                        );
+                    case "register.ftl":
+                        return (
+                            <Register
+                                {...{
+                                    kcContext,
+                                    i18n,
+                                    classes,
+                                    Template,
+                                    doUseDefaultCss: false,
+                                    UserProfileFormFields,
+                                    doMakeUserConfirmPassword
+                                }}
+                            />
+                        );
+                    case "login-reset-password.ftl":
+                        return (
+                            <LoginResetPassword
+                                {...{
+                                    kcContext,
+                                    i18n,
+                                    classes,
+                                    Template,
+                                    doUseDefaultCss: false
+                                }}
                             />
                         );
                     default:

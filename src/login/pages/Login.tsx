@@ -3,11 +3,12 @@ import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
 import { kcSanitize } from "keycloakify/lib/kcSanitize";
+import Footer from "../components/Footer";
 
 export default function Login(props: PageProps<Extract<KcContext, { pageId: "login.ftl" }>, I18n>) {
     const { kcContext, i18n } = props;
     const { url, login, realm, messagesPerField, message } = kcContext;
-    const { msgStr } = i18n;
+    const { msg, msgStr } = i18n;
     const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
 
     return (
@@ -42,7 +43,11 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                 <form action={url.loginAction} method="post" className="space-y-4">
                                     <div className="space-y-4">
                                         <label className="ml-1 mb-1 flex justify-between text-[10px] font-bold text-slate-500 uppercase">
-                                            Usuario o email
+                                            {!realm.loginWithEmailAllowed
+                                                ? msg("username")
+                                                : !realm.registrationEmailAsUsername
+                                                  ? msg("usernameOrEmail")
+                                                  : msg("email")}
                                         </label>
                                         <input
                                             name="username"
@@ -58,10 +63,10 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         />
 
                                         <label className="ml-1 mb-1 flex justify-between text-[10px] font-bold text-slate-500 uppercase">
-                                            <span>Contraseña</span>
+                                            <span>{msg("password")}</span>
                                             {realm.resetPasswordAllowed && (
                                                 <a href={url.loginResetCredentialsUrl} className="text-emerald-800 text-[10px] hover:underline">
-                                                    ¿Olvidaste tu contraseña?
+                                                    {msg("doForgotPassword")}
                                                 </a>
                                             )}
                                         </label>
@@ -93,7 +98,7 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                         onClick={() => setIsLoginButtonDisabled(true)}
                                         disabled={isLoginButtonDisabled}
                                     >
-                                        Ingresar
+                                        {msgStr("doLogIn")}
                                     </button>
                                 </form>
 
@@ -132,17 +137,3 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
         </div>
     );
 }
-
-const Footer = () => {
-    return (
-        <div className="relative  py-6 text-gray-600">
-            <div className="mx-auto flex flex-col items-center justify-center gap-6 px-6 md:flex-row">
-                <div className="flex flex-col items-center gap-3 md:flex-row md:gap-6">
-                    <img src="/escudo.png" alt="Municipalidad Algarrobo" width={200} height={40} className="w-32 object-cover opacity-80" />
-                    <span className="hidden h-10 w-px bg-gray-400 md:block"></span>
-                    <p className="text-sm">2026 © Ilustre Municipalidad de Algarrobo</p>
-                </div>
-            </div>
-        </div>
-    );
-};

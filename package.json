@@ -1,11 +1,7 @@
 {
-    "name": "keycloakify-starter",
+    "name": "accion-mascota-public-keycloak",
     "version": "0.0.0",
-    "description": "Starter for Keycloakify 11",
-    "repository": {
-        "type": "git",
-        "url": "git://github.com/codegouvfr/keycloakify-starter.git"
-    },
+    "description": "Login personalizado para portal publico de accion mascota con keycloak",
     "type": "module",
     "scripts": {
         "dev": "vite",

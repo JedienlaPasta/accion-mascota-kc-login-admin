@@ -4,7 +4,7 @@ const Footer = () => {
             <div className="mx-auto flex flex-col items-center justify-center gap-6 px-6 md:flex-row">
                 <div className="flex flex-col items-center gap-3 md:flex-row md:gap-6">
                     <img
-                        src="/escudo.png"
+                        src={`${import.meta.env.BASE_URL}escudo.png`}
                         alt="Municipalidad Algarrobo"
                         width={200}
                         height={40}

@@ -5,6 +5,7 @@ import { useI18n } from "./i18n";
 import DefaultPage from "keycloakify/login/DefaultPage";
 import Template from "keycloakify/login/Template";
 import "./index.css";
+import FallbackSkeleton from "./components/FallbackSkeleton";
 
 const UserProfileFormFields = lazy(
     () => import("keycloakify/login/UserProfileFormFields")
@@ -22,7 +23,7 @@ export default function KcPage(props: { kcContext: KcContext }) {
     const { i18n } = useI18n({ kcContext });
 
     return (
-        <Suspense fallback={<div>Cargando...</div>}>
+        <Suspense fallback={<FallbackSkeleton />}>
             {(() => {
                 switch (kcContext.pageId) {
                     case "login.ftl":

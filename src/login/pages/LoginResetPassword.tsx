@@ -20,7 +20,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                         {/* Cabecera y Logo */}
                         <div className="mb-8 space-y-2.5 text-center">
                             <img
-                                src="/mascota_icon.png"
+                                src={`${import.meta.env.BASE_URL}mascota_icon.png`}
                                 alt="Logo Acción Mascota"
                                 width={200}
                                 height={32}

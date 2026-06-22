@@ -1,4 +1,4 @@
-import { useState } from "react";
+// import { useState } from "react";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
@@ -9,7 +9,6 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     const { kcContext, i18n } = props;
     const { url, login, realm, messagesPerField, message } = kcContext;
     const { msg, msgStr } = i18n;
-    const [isLoginButtonDisabled, setIsLoginButtonDisabled] = useState(false);
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
@@ -95,8 +94,6 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
                                     <button
                                         type="submit"
                                         className="flex h-12 w-full justify-center gap-2 cursor-pointer items-center rounded-xl bg-emerald-800/90 px-7 text-white shadow-emerald-950/30 transition-shadow duration-300 hover:shadow-lg"
-                                        onClick={() => setIsLoginButtonDisabled(true)}
-                                        disabled={isLoginButtonDisabled}
                                     >
                                         {msgStr("doLogIn")}
                                     </button>

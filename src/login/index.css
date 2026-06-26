@@ -1,58 +1,62 @@
 @import "tailwindcss";
 
+/* outfit-300 - latin */
 @font-face {
-    font-family: "Geist";
-    src: url("/node_modules/geist/dist/fonts/geist-sans/Geist-Thin.woff2") format("woff2");
-    font-weight: 100;
-}
-@font-face {
-    font-family: "Geist";
-    src: url("/node_modules/geist/dist/fonts/geist-sans/Geist-UltraLight.woff2")
-        format("woff2");
-    font-weight: 200;
-}
-@font-face {
-    font-family: "Geist";
-    src: url("/node_modules/geist/dist/fonts/geist-sans/Geist-Light.woff2")
-        format("woff2");
+    font-display: block;
+    font-family: "Outfit";
+    font-style: normal;
     font-weight: 300;
+    src: url("/fonts/outfit-v15-latin-300.woff2") format("woff2");
 }
+/* outfit-regular - latin */
 @font-face {
-    font-family: "Geist";
-    src: url("/node_modules/geist/dist/fonts/geist-sans/Geist-Regular.woff2")
-        format("woff2");
+    font-display: block;
+    font-family: "Outfit";
+    font-style: normal;
     font-weight: 400;
+    src: url("/fonts/outfit-v15-latin-regular.woff2") format("woff2");
 }
+/* outfit-500 - latin */
 @font-face {
-    font-family: "Geist";
-    src: url("/node_modules/geist/dist/fonts/geist-sans/Geist-Medium.woff2")
-        format("woff2");
+    font-display: block;
+    font-family: "Outfit";
+    font-style: normal;
     font-weight: 500;
+    src: url("/fonts/outfit-v15-latin-500.woff2") format("woff2");
 }
+/* outfit-600 - latin */
 @font-face {
-    font-family: "Geist";
-    src: url("/node_modules/geist/dist/fonts/geist-sans/Geist-SemiBold.woff2")
-        format("woff2");
+    font-display: block;
+    font-family: "Outfit";
+    font-style: normal;
     font-weight: 600;
+    src: url("/fonts/outfit-v15-latin-600.woff2") format("woff2");
 }
+/* outfit-700 - latin */
 @font-face {
-    font-family: "Geist";
-    src: url("/node_modules/geist/dist/fonts/geist-sans/Geist-Bold.woff2") format("woff2");
+    font-display: block;
+    font-family: "Outfit";
+    font-style: normal;
     font-weight: 700;
+    src: url("/fonts/outfit-v15-latin-700.woff2") format("woff2");
 }
+/* outfit-800 - latin */
 @font-face {
-    font-family: "Geist";
-    src: url("/node_modules/geist/dist/fonts/geist-sans/Geist-ExtraBold.woff2")
-        format("woff2");
+    font-display: block;
+    font-family: "Outfit";
+    font-style: normal;
     font-weight: 800;
+    src: url("/fonts/outfit-v15-latin-800.woff2") format("woff2");
 }
+/* outfit-900 - latin */
 @font-face {
-    font-family: "Geist";
-    src: url("/node_modules/geist/dist/fonts/geist-sans/Geist-Black.woff2")
-        format("woff2");
+    font-display: block;
+    font-family: "Outfit";
+    font-style: normal;
     font-weight: 900;
+    src: url("/fonts/outfit-v15-latin-900.woff2") format("woff2");
 }
 
 @theme {
-    --font-geist: "Geist", sans-serif;
+    --font-outfit: "Outfit", sans-serif;
 }

@@ -10,15 +10,15 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
     const { url, realm, auth, messagesPerField, message } = kcContext;
     const { msg, msgStr } = i18n;
 
-    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">
-            <div className="flex flex-1 items-center justify-around relative font-geist">
-                <div className="flex min-h-[80vh] items-center justify-center px-4 py-12">
-                    <div className="w-full max-w-md space-y-6">
+            <div className="flex flex-1 items-center justify-around relative font-outfit">
+                <div className="flex items-center justify-center px-4 py-12">
+                    <div className="max-w-md space-y-6">
                         {/* Cabecera y Logo */}
-                        <div className="mb-8 space-y-2.5 text-center">
+                        <div className="mb-4 space-y-2.5 text-center">
                             <img
                                 src={`${import.meta.env.BASE_URL}mascota_icon.png`}
                                 alt="Logo Acción Mascota"
@@ -29,7 +29,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                             <p className="mx-auto inline-flex items-center rounded-full bg-emerald-50 px-4 py-1 text-[11px] font-semibold tracking-[0.18em] text-emerald-800 uppercase">
                                 Portal ciudadano · Tenencia responsable
                             </p>
-                            <h1 className="text-gray-800 text-2xl font-bold">Portal Acción Mascota</h1>
+                            <h1 className="text-gray-800 text-2xl font-extrabold">Recuperar Contraseña</h1>
                         </div>
 
                         {/* Tarjeta de Recuperación */}
@@ -48,7 +48,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                             </span>
 
                             <div className="px-6">
-                                <form action={url.loginAction} method="post" className="space-y-4">
+                                <form action={url.loginAction} method="post" className="space-y-4" onSubmit={() => setIsLoading(true)}>
                                     <div className="space-y-1">
                                         <label
                                             htmlFor="username"
@@ -64,7 +64,7 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                                             type="text"
                                             id="username"
                                             name="username"
-                                            className={`h-11 w-full rounded-xl border bg-white px-4 text-sm shadow-sm transition-all outline-none placeholder:text-[13px] placeholder:text-gray-400 focus-within:ring-2 ${
+                                            className={`h-11 w-full rounded-xl border bg-white px-4 text-sm shadow-sm shadow-gray-200/80 transition-all outline-none placeholder:text-[13px] placeholder:text-slate-400/70 focus-within:ring-2 ${
                                                 messagesPerField.existsError("username")
                                                     ? "border-red-500 focus-within:border-red-500 focus-within:ring-red-100"
                                                     : "border-slate-200 text-gray-700 focus-within:border-blue-400 focus-within:ring-blue-100"
@@ -81,14 +81,26 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                                         )}
                                     </div>
 
-                                    <div className="pt-1">
+                                    <div className="pt-4">
                                         <button
+                                            disabled={isLoading}
                                             type="submit"
-                                            className="flex h-12 w-full justify-center gap-2 cursor-pointer items-center rounded-xl bg-emerald-800/90 px-7 text-white shadow-emerald-950/30 transition-all duration-300 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed"
-                                            onClick={() => setIsButtonDisabled(true)}
-                                            disabled={isButtonDisabled}
+                                            className={`group relative flex h-12 w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl font-semibold text-white shadow-lg shadow-gray-200 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed ${
+                                                isLoading ? "bg-emerald-900/50" : "bg-emerald-800/90 hover:bg-emerald-700"
+                                            }`}
                                         >
-                                            {msgStr("doSubmit")}
+                                            {!isLoading && (
+                                                <div className="absolute inset-0 rounded-xl bg-linear-to-br from-emerald-600 via-emerald-700 to-emerald-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                                            )}
+                                            <div className="relative z-10 flex items-center justify-center gap-2">
+                                                {isLoading ? (
+                                                    <div className="flex items-center justify-center">
+                                                        <div className="size-5 animate-spin rounded-full border-4 border-white/80 border-t-emerald-800/60" />
+                                                    </div>
+                                                ) : (
+                                                    msgStr("doSubmit")
+                                                )}
+                                            </div>
                                         </button>
                                     </div>
                                 </form>

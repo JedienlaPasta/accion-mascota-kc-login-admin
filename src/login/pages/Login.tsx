@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import type { PageProps } from "keycloakify/login/pages/PageProps";
 import type { KcContext } from "../KcContext";
 import type { I18n } from "../i18n";
@@ -12,6 +11,35 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
     const { msg, msgStr } = i18n;
 
     const [isLoading, setIsLoading] = useState(false);
+
+    if (message !== undefined && message.type === "success") {
+        return (
+            <div className="flex flex-col items-center justify-center text-center space-y-6 py-4">
+                <div className="bg-emerald-50 p-4 rounded-full">
+                    <svg className="w-10 h-10 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                        />
+                    </svg>
+                </div>
+                <div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">Revisa tu bandeja de entrada</h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">
+                        <span dangerouslySetInnerHTML={{ __html: kcSanitize(message.summary) }} />
+                    </p>
+                </div>
+                <a
+                    href={url.loginUrl}
+                    className="mt-4 flex h-11 w-full items-center justify-center rounded-xl bg-slate-100 font-semibold text-slate-700 transition-colors hover:bg-slate-200"
+                >
+                    Volver a Iniciar Sesión
+                </a>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen flex flex-col bg-gray-50">

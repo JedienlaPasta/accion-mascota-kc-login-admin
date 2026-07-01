@@ -60,19 +60,38 @@ export default function LoginResetPassword(props: PageProps<Extract<KcContext, {
                                                   ? msg("usernameOrEmail")
                                                   : msg("email")}
                                         </label>
-                                        <input
-                                            type="text"
-                                            id="username"
-                                            name="username"
-                                            className={`h-11 w-full rounded-xl border bg-white px-4 text-sm shadow-sm shadow-gray-200/80 transition-all outline-none placeholder:text-[13px] placeholder:text-slate-400/70 focus-within:ring-2 ${
-                                                messagesPerField.existsError("username")
-                                                    ? "border-red-500 focus-within:border-red-500 focus-within:ring-red-100"
-                                                    : "border-slate-200 text-gray-700 focus-within:border-blue-400 focus-within:ring-blue-100"
-                                            }`}
-                                            autoFocus
-                                            defaultValue={auth?.attemptedUsername ?? ""}
-                                            aria-invalid={messagesPerField.existsError("username")}
-                                        />
+                                        {realm.loginWithEmailAllowed && realm.registrationEmailAsUsername ? (
+                                            <input
+                                                type="email"
+                                                id="username"
+                                                name="username"
+                                                placeholder="ejemplo@gmail.com"
+                                                autoComplete="email"
+                                                className={`h-11 w-full rounded-xl border bg-white px-4 text-sm shadow-sm shadow-gray-200/80 transition-all outline-none placeholder:text-[13px] placeholder:text-slate-400/70 focus-within:ring-2 ${
+                                                    messagesPerField.existsError("username")
+                                                        ? "border-red-500 focus-within:border-red-500 focus-within:ring-red-100"
+                                                        : "border-slate-200 text-gray-700 focus-within:border-blue-400 focus-within:ring-blue-100"
+                                                }`}
+                                                autoFocus
+                                                defaultValue={auth?.attemptedUsername ?? ""}
+                                                aria-invalid={messagesPerField.existsError("username")}
+                                            />
+                                        ) : (
+                                            <input
+                                                type="text"
+                                                id="username"
+                                                name="username"
+                                                className={`h-11 w-full rounded-xl border bg-white px-4 text-sm shadow-sm shadow-gray-200/80 transition-all outline-none placeholder:text-[13px] placeholder:text-slate-400/70 focus-within:ring-2 ${
+                                                    messagesPerField.existsError("username")
+                                                        ? "border-red-500 focus-within:border-red-500 focus-within:ring-red-100"
+                                                        : "border-slate-200 text-gray-700 focus-within:border-blue-400 focus-within:ring-blue-100"
+                                                }`}
+                                                autoFocus
+                                                defaultValue={auth?.attemptedUsername ?? ""}
+                                                aria-invalid={messagesPerField.existsError("username")}
+                                            />
+                                        )}
+
                                         {messagesPerField.existsError("username") && (
                                             <span
                                                 className="text-rose-500 text-xs font-medium ml-1 block mt-3"

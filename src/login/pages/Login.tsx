@@ -14,29 +14,46 @@ export default function Login(props: PageProps<Extract<KcContext, { pageId: "log
 
     if (message !== undefined && message.type === "success") {
         return (
-            <div className="flex flex-col items-center justify-center text-center space-y-6 py-4">
-                <div className="bg-emerald-50 p-4 rounded-full">
-                    <svg className="w-10 h-10 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth="2"
-                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                        />
-                    </svg>
+            <div className="min-h-screen flex flex-col bg-gray-50">
+                <div className="flex flex-1 items-center justify-around relative font-outfit">
+                    <div className="flex items-center justify-center px-4 py-12">
+                        <div className="max-w-md space-y-6">
+                            <div className="mb-4 space-y-2.5 text-center">
+                                <img
+                                    src={`${import.meta.env.BASE_URL}mascota_icon.png`}
+                                    alt="Logo Acción Mascota"
+                                    width={200}
+                                    height={32}
+                                    className="-mt-2 h-20 w-30 place-self-center object-cover"
+                                />
+                                <p className="mx-auto inline-flex items-center rounded-full bg-emerald-50 px-4 py-1 text-[11px] font-semibold tracking-[0.18em] text-emerald-800 uppercase">
+                                    Portal ciudadano · Tenencia responsable
+                                </p>
+                            </div>
+
+                            <div className="flex flex-col gap-6 rounded-xl py-2 text-gray-600">
+                                <div className="px-6">
+                                    <div className="text-center space-y-6">
+                                        <div className="space-y-2">
+                                            <h3 className="text-2xl font-extrabold text-gray-800">Revisa tu bandeja de entrada</h3>
+                                            <p className="text-sm text-gray-600 leading-relaxed">
+                                                <span dangerouslySetInnerHTML={{ __html: kcSanitize(message.summary) }} />
+                                            </p>
+                                        </div>
+                                        <a
+                                            href={url.loginUrl}
+                                            className="group relative flex h-12 w-full cursor-pointer items-center justify-center overflow-hidden rounded-xl font-semibold text-white shadow-lg shadow-gray-200 transition-all duration-300 bg-emerald-800/90 hover:bg-emerald-700"
+                                        >
+                                            <div className="absolute inset-0 rounded-xl bg-linear-to-br from-emerald-600 via-emerald-700 to-emerald-800 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                                            <div className="relative z-10 flex items-center justify-center gap-2">Volver a Iniciar Sesión</div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">Revisa tu bandeja de entrada</h3>
-                    <p className="text-sm text-slate-600 leading-relaxed">
-                        <span dangerouslySetInnerHTML={{ __html: kcSanitize(message.summary) }} />
-                    </p>
-                </div>
-                <a
-                    href={url.loginUrl}
-                    className="mt-4 flex h-11 w-full items-center justify-center rounded-xl bg-slate-100 font-semibold text-slate-700 transition-colors hover:bg-slate-200"
-                >
-                    Volver a Iniciar Sesión
-                </a>
+                <Footer />
             </div>
         );
     }
